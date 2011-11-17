@@ -20,7 +20,7 @@ class SitelinkCsv
   end
 
   def get_units(location_code="")
-    unless location_code.emtpy?
+    unless location_code.empty?
       units= []
       response = @client.request :units_information_v2, body: { 'sCorpCode' => @corp_code, 'sLocationCode' => location_code, 'sCorpUserName' => @user, 'sCorpPassword' => @password, 'sLastTimePolled' => 0 }
       tables = response.xpath('//Table')
