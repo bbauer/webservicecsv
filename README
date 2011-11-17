@@ -1,5 +1,5 @@
 > git clone git@github.com:bbauer/webservicecsv.git
-> cd integration_output/
+> cd webservicecsv
 > rvm use 1.9.2
 > bundle install
 
