@@ -1,6 +1,5 @@
-> git clone git@github.com:bbauer/integration_output.git
+> git clone git@github.com:bbauer/webservicecsv.git
 > cd integration_output/
-> gem install rvm
 > rvm use 1.9.2
 > bundle install
 

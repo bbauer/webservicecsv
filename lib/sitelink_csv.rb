@@ -20,7 +20,7 @@ class SitelinkCsv
   end
 
   def get_units(location_code="")
-    if !location_code.emtpy?
+    unless location_code.emtpy?
       units= []
       response = @client.request :units_information_v2, body: { 'sCorpCode' => @corp_code, 'sLocationCode' => location_code, 'sCorpUserName' => @user, 'sCorpPassword' => @password, 'sLastTimePolled' => 0 }
       tables = response.xpath('//Table')
@@ -56,36 +56,37 @@ class SitelinkCsv
   end
   
   def output_csv(location_code="", file="")
-    return "" if location_code.empty? && file.empty?
-    units = get_units(location_code)
-    CSV.open(file, "w") do |csv|
-      csv << ["ret_code","unit_type_id","s_type_name","i_def_lease_num","unit_id","s_unit_name","dc_width","dc_length","b_climate","dc_std_rate","b_rented","b_inside","b_power","b_alarm","i_floor","b_waiting_list_reserved","b_corporate","b_rentable","dc_board_rate","dc_push_rate","dc_tax1_rate","dc_tax2_rate","dc_std_weekly_rate"]
-      units.each do |unit|
-        csv << [
-          unit[:ret_code], 
-          unit[:unit_type_id], 
-          unit[:s_type_name], 
-          unit[:i_def_lease_num], 
-          unit[:unit_id], 
-          unit[:s_unit_name], 
-          unit[:dc_width], 
-          unit[:dc_length], 
-          unit[:b_climate], 
-          unit[:dc_std_rate], 
-          unit[:b_rented], 
-          unit[:b_inside], 
-          unit[:b_power], 
-          unit[:b_alarm], 
-          unit[:i_floor], 
-          unit[:b_waiting_list_reserved], 
-          unit[:b_corporate], 
-          unit[:b_rentable], 
-          unit[:dc_board_rate], 
-          unit[:dc_push_rate], 
-          unit[:dc_tax1_rate], 
-          unit[:dc_tax2_rate], 
-          unit[:dc_std_weekly_rate]
-        ]
+    unless location_code.empty? && file.empty?
+      units = get_units(location_code)
+      CSV.open(file, "w") do |csv|
+        csv << ["ret_code","unit_type_id","s_type_name","i_def_lease_num","unit_id","s_unit_name","dc_width","dc_length","b_climate","dc_std_rate","b_rented","b_inside","b_power","b_alarm","i_floor","b_waiting_list_reserved","b_corporate","b_rentable","dc_board_rate","dc_push_rate","dc_tax1_rate","dc_tax2_rate","dc_std_weekly_rate"]
+        units.each do |unit|
+          csv << [
+            unit[:ret_code], 
+            unit[:unit_type_id], 
+            unit[:s_type_name], 
+            unit[:i_def_lease_num], 
+            unit[:unit_id], 
+            unit[:s_unit_name], 
+            unit[:dc_width], 
+            unit[:dc_length], 
+            unit[:b_climate], 
+            unit[:dc_std_rate], 
+            unit[:b_rented], 
+            unit[:b_inside], 
+            unit[:b_power], 
+            unit[:b_alarm], 
+            unit[:i_floor], 
+            unit[:b_waiting_list_reserved], 
+            unit[:b_corporate], 
+            unit[:b_rentable], 
+            unit[:dc_board_rate], 
+            unit[:dc_push_rate], 
+            unit[:dc_tax1_rate], 
+            unit[:dc_tax2_rate], 
+            unit[:dc_std_weekly_rate]
+          ]
+        end
       end
     end
   end
