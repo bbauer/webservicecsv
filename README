@@ -1,0 +1,13 @@
+> git clone git@github.com:bbauer/integration_output.git
+> cd integration_output/
+> gem install rvm
+> rvm use 1.9.2
+> bundle install
+
+To Run Sitelink CSV Exporter
+
+> cd lib/
+> require 'sitelink_csv'
+> client = SitelinkCsv.new(:user => 'username', :password => 'passord', :corp_code => 'code', :file => '/destination/directory/file.csv')
+> client.output_csv('location_code')
+
