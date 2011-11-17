@@ -9,6 +9,6 @@ To Run Sitelink CSV Exporter
 > cd lib/
 > irb -I .
 > require 'sitelink_csv'
-> client = SitelinkCsv.new(:user => 'username', :password => 'passord', :corp_code => 'code', :file => '/destination/directory/file.csv')
-> client.output_csv('location_code')
+> client = SitelinkCsv.new(:user => 'username', :password => 'passord', :corp_code => 'code')
+> client.output_csv('location_code','/destination/directory/file.csv')
 

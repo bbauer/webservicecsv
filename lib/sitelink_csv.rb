@@ -7,13 +7,12 @@ class SitelinkCsv
   VERSION = "2.1"
 
   def initialize(options = {})
-    if options[:corp_code].blank? || options[:user].blank? || options[:password].blank? || options[:file].blank?
+    if options[:corp_code].blank? || options[:user].blank? || options[:password].blank?
       puts "You need all the creds biotch!"
     else
       @corp_code = options[:corp_code]
       @user      = options[:user]
       @password  = options[:password]
-      @file      = options[:file]
       @client    = Savon::Client.new do
         wsdl.document = WSDL_URL
       end
@@ -54,9 +53,10 @@ class SitelinkCsv
     units
   end
   
-  def output_csv(location_code = "L009")
+  def output_csv(location_code="", file="")
+    return "" if location_code.blank? && file.blank?
     units = get_units(location_code)
-    CSV.open(@file, "w") do |csv|
+    CSV.open(file, "w") do |csv|
       csv << ["ret_code","unit_type_id","s_type_name","i_def_lease_num","unit_id","s_unit_name","dc_width","dc_length","b_climate","dc_std_rate","b_rented","b_inside","b_power","b_alarm","i_floor","b_waiting_list_reserved","b_corporate","b_rentable","dc_board_rate","dc_push_rate","dc_tax1_rate","dc_tax2_rate","dc_std_weekly_rate"]
       units.each do |unit|
         csv << [
