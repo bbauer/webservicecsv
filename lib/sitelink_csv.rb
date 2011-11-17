@@ -54,9 +54,9 @@ class SitelinkCsv
     end
     units
   end
-  
+
   def output_csv(location_code="", file="")
-    unless location_code.empty? && file.empty?
+    unless location_code.empty? || file.empty?
       units = get_units(location_code)
       CSV.open(file, "w") do |csv|
         csv << ["ret_code","unit_type_id","s_type_name","i_def_lease_num","unit_id","s_unit_name","dc_width","dc_length","b_climate","dc_std_rate","b_rented","b_inside","b_power","b_alarm","i_floor","b_waiting_list_reserved","b_corporate","b_rentable","dc_board_rate","dc_push_rate","dc_tax1_rate","dc_tax2_rate","dc_std_weekly_rate"]
@@ -90,5 +90,5 @@ class SitelinkCsv
       end
     end
   end
-  
+
 end
